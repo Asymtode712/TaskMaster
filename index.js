@@ -5,7 +5,7 @@ let currentTaskId = null;
 // Login function
 async function login(email, password) {
     try {
-        const response = await fetch('http://localhost:3000/auth/login', {
+        const response = await fetch('https://taskmaster-ch2e.onrender.com/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ async function login(email, password) {
 // Register function
 async function register(email, password) {
     try {
-        const response = await fetch('http://localhost:3000/auth/register', {
+        const response = await fetch('https://taskmaster-ch2e.onrender.com/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ document.querySelector('#insert').onclick = async function(){
         const priority = document.querySelector('#priority').value;
         
         try {
-            const response = await fetch('http://localhost:3000/tasks', {
+            const response = await fetch('https://taskmaster-ch2e.onrender.com/tasks', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -123,7 +123,7 @@ function attachEventListeners() {
             var taskName = taskElement.querySelector('#taskname').innerText;
             
             try {
-                const response = await fetch(`http://localhost:3000/tasks/${taskId}/complete`, {
+                const response = await fetch(`https://taskmaster-ch2e.onrender.com/tasks/${taskId}/complete`, {
                     method: 'PUT',
                     headers: {
                         'Authorization': `Bearer ${authToken}`
@@ -185,7 +185,7 @@ function attachEventListeners() {
                 var taskId = taskElement.getAttribute('data-id');
     
                 try {
-                    const response = await fetch(`http://localhost:3000/tasks/${taskId}`, {
+                    const response = await fetch(`https://taskmaster-ch2e.onrender.com/tasks/${taskId}`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
@@ -265,7 +265,7 @@ function attachEventListeners() {
         currentTaskId = taskElement.getAttribute('data-id');
         
         try {
-            const response = await fetch(`http://localhost:3000/tasks/${currentTaskId}/details`, {
+            const response = await fetch(`https://taskmaster-ch2e.onrender.com/tasks/${currentTaskId}/details`, {
                 headers: {
                     'Authorization': `Bearer ${authToken}`
                 }
@@ -351,7 +351,7 @@ function sortTasks(sortType) {
 
 async function deleteCompletedTasks() {
     try {
-        const response = await fetch('http://localhost:3000/tasks/completed', {
+        const response = await fetch('https://taskmaster-ch2e.onrender.com/tasks/completed', {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${authToken}`
@@ -391,7 +391,7 @@ document.getElementById('taskDetailsForm').addEventListener('submit', async (e) 
     
     try {
         const method = 'POST'; // You might want to check if details exist first and use PUT instead
-        const response = await fetch(`http://localhost:3000/tasks/${currentTaskId}/details`, {
+        const response = await fetch(`https://taskmaster-ch2e.onrender.com/tasks/${currentTaskId}/details`, {
             method,
             headers: {
                 'Content-Type': 'application/json',
@@ -419,7 +419,7 @@ document.getElementById('taskDetailsForm').addEventListener('submit', async (e) 
 // Load tasks on page load
 async function loadTasks() {
     try {
-        const response = await fetch('http://localhost:3000/tasks', {
+        const response = await fetch('https://taskmaster-ch2e.onrender.com/tasks', {
             headers: {
                 'Authorization': `Bearer ${authToken}`
             }

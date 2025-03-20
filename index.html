@@ -3,198 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaskMaster - Login</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <title>TaskMaster - Your Ultimate To-Do List App</title>
+    <link rel="stylesheet" href="home.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <!-- Authentication Container -->
-    <div id="authContainer" class="auth-container">
-        <!-- Login Form -->
-        <div id="loginForm" class="auth-form">
-            <h2>Welcome to TaskMaster</h2>
-            <p>Please login to continue</p>
-            <input type="email" id="loginEmail" placeholder="Email" required>
-            <input type="password" id="loginPassword" placeholder="Password" required>
-            <button onclick="handleLogin()">Login</button>
-            <div class="auth-switch">
-                Don't have an account? <a onclick="showRegisterForm()">Register</a>
+    <header>
+        <nav>
+            <div class="logo">TaskMaster</div>
+            <ul>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Manage Your Tasks with Ease</h1>
+            <p>TaskMaster helps you organize your life, boost productivity, and achieve your goals.</p>
+            <a href="main.html" class="cta-button">Get Started</a>
+        </section>
+
+        <section id="features">
+            <h2>Features</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <i class="fas fa-list-ul"></i>
+                    <h3>Simple Task Management</h3>
+                    <p>Easily add, complete, and delete tasks.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Track Completed Tasks</h3>
+                    <p>Keep a record of your accomplishments.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Responsive Design</h3>
+                    <p>Access your tasks from any device.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-cloud"></i>
+                    <h3>Cloud Storage</h3>
+                    <p>Your tasks are safely stored and always accessible.</p>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Register Form -->
-        <div id="registerForm" class="auth-form hidden">
-            <h2>Create Account</h2>
-            <p>Get started with TaskMaster</p>
-            <input type="email" id="registerEmail" placeholder="Email" required>
-            <input type="password" id="registerPassword" placeholder="Password" required>
-            <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
-            <button onclick="handleRegister()">Register</button>
-            <div class="auth-switch">
-                Already have an account? <a onclick="showLoginForm()">Login</a>
-            </div>
-        </div>
-    </div>
+        <section id="about">
+            <h2>About TaskMaster</h2>
+            <p>TaskMaster is designed to simplify your life by providing an intuitive and efficient way to manage your daily tasks. Whether you're a busy professional, a student, or anyone looking to boost their productivity, TaskMaster is here to help you stay organized and focused on what matters most.</p>
+        </section>
 
-    <!-- Task Container (initially hidden) -->
-    <div id="taskContainer" class="container hidden">
-        <!-- Existing task management UI -->
-        <div id="new">
-            <div class="priority-selector">
-                <p>Select Priority:</p>
-                <select id="priority">
-                    <option value="1">Priority 1 (Highest)</option>
-                    <option value="2">Priority 2</option>
-                    <option value="3" selected>Priority 3</option>
-                    <option value="4">Priority 4</option>
-                    <option value="5">Priority 5 (Lowest)</option>
-                </select>
-            </div>
-            <input type="text" placeholder="Enter your task">
-            <button id="insert">Add</button>
-        </div>
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <form>
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </main>
 
-        <h2 id="head1">Pending task list</h2>
-        <div class="sort-control">
-            <label for="sortTasks">Sort by:</label>
-            <select id="sortTasks">
-                <option value="priority-asc">Priority (High to Low)</option>
-                <option value="priority-desc">Priority (Low to High)</option>
-                <option value="name-asc">Name (A to Z)</option>
-                <option value="name-desc">Name (Z to A)</option>
-            </select>
-        </div>
-        <div id="current"></div>
-
-        <h2 id="head2">Completed task list</h2>
-        <div id="newcurrent"></div>
-
-        <button id="deleteCompleted" onclick="deleteCompletedTasks()">Delete Completed Tasks</button>
-        
-        <!-- Logout button -->
-        <button id="logoutButton" onclick="handleLogout()" class="logout-button">Logout</button>
-    </div>
-
-    <!-- Task Details Modal -->
-<div id="taskDetailsModal" class="modal hidden">
-    <div class="modal-overlay"></div>
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3>Task Details</h3>
-        <button class="close-modal">&times;</button>
-      </div>
-      <div class="modal-body">
-        <form id="taskDetailsForm">
-          <input type="hidden" id="taskDetailsId">
-          <div class="form-group">
-            <label for="taskDescription">Description</label>
-            <textarea id="taskDescription" rows="4" placeholder="Add task description..."></textarea>
-          </div>
-          <div class="form-group">
-            <label for="startDateTime">Start Date & Time</label>
-            <input type="datetime-local" id="startDateTime">
-          </div>
-          <div class="form-group">
-            <label for="endDateTime">End Date & Time</label>
-            <input type="datetime-local" id="endDateTime">
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="save-details">Save Details</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-    <script>
-        // Authentication UI Functions
-        function showLoginForm() {
-            document.getElementById('registerForm').classList.add('hidden');
-            document.getElementById('loginForm').classList.remove('hidden');
-        }
-
-        function showRegisterForm() {
-            document.getElementById('loginForm').classList.add('hidden');
-            document.getElementById('registerForm').classList.remove('hidden');
-        }
-
-        function showTaskUI() {
-            if (!authToken) {
-                showLoginForm();
-                return;
-            }
-            document.querySelector('#authContainer').classList.add('hidden');
-            document.querySelector('#taskContainer').classList.remove('hidden');
-        }
-
-
-        function showAuthUI() {
-            document.getElementById('taskContainer').classList.add('hidden');
-            document.getElementById('authContainer').classList.remove('hidden');
-            showLoginForm();
-        }
-
-        // Authentication Handlers
-        async function handleLogin() {
-            const email = document.getElementById('loginEmail').value;
-            const password = document.getElementById('loginPassword').value;
-
-            if (!email || !password) {
-                alert('Please enter both email and password');
-                return;
-            }
-
-            try {
-                await login(email, password);
-                showTaskUI();
-            } catch (error) {
-                alert('Login failed: ' + error.message);
-            }
-        }
-
-        async function handleRegister() {
-            const email = document.getElementById('registerEmail').value;
-            const password = document.getElementById('registerPassword').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-
-            if (!email || !password || !confirmPassword) {
-                alert('Please fill in all fields');
-                return;
-            }
-
-            if (password !== confirmPassword) {
-                alert('Passwords do not match');
-                return;
-            }
-
-            try {
-                await register(email, password);
-                showLoginForm();
-            } catch (error) {
-                alert('Registration failed: ' + error.message);
-            }
-        }
-
-        function handleLogout() {
-            localStorage.removeItem('authToken');
-            authToken = null;
-            showAuthUI();
-        }
-
-        // Check authentication status on page load
-        window.onload = function() {
-            const token = localStorage.getItem('authToken');
-            if (!token) {
-                showAuthUI();
-            } else {
-                authToken = token;
-                showTaskUI();
-                loadTasks();
-            }
-        }
-    </script>
-    <script src="index.js"></script>
+    <footer>
+        <p>&copy; 2024 TaskMaster. All rights reserved.</p>
+    </footer>
 </body>
 </html>
